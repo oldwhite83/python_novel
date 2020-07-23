@@ -14,28 +14,7 @@ def get_pages(url):
         # 创建请求日志文件夹
         if 'Log' not in os.listdir('.'):
             os.mkdir(r"./Log")
-        # headers = {
-        #     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
-        #     'Host':'www.23txt.com',
-        #     'Cookie': 'PPad_id_PP=1; hitme=2; hitbookid=37532',
-        #     'Connection': 'keep-alive',
-        #     'Accept': 'ext/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-        #     'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-        #     'Accept-Encoding': 'gzip',
-        #     'Referer' : "https://www.23txt.com/files/article/html/37/37532/",
-        #     'content-type':'text/html; charset=gbk',
-        #     'transfer-encoding':'chunked',
-        #     'date': 'Thu, 23 Jul 2020 12:29:48 GMT',
-        #     'l-proxy-cache':'MISS',
-        #     'server':'nginx/1.16.1',
-        #     'vary':'Accept-Encoding',
-        #     'x-drive':'default',
-        #     'x-proxy-cache':'MISS'
-        # }
-        #params = urllib.parse.urlencode(data).encode(encoding='gbk')
 
-        # 请求当前章节页面  params为请求参数
-        #request = urllib.request.Request(url,headers)
         request = urllib.request.Request(url)
         response = urllib.request.urlopen(request)
         content = response.read()
