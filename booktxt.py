@@ -44,7 +44,8 @@ def get_ChartTxt(url,title,num):
     if re.search(r'.*?章', subtitle) is  None:
         return
     # 获取章节文本
-    content = soup.select('#content')[0].text
+    content = soup.select('#content')[0]
+    content = str(content)
     # 消除 \xa0
     content = unicodedata.normalize('NFKC', content)
     # 按照指定格式替换章节内容，运用正则表达式
@@ -53,7 +54,8 @@ def get_ChartTxt(url,title,num):
     content = re.sub(r'\r\n', '', content)
     content = re.sub(r'\n+', '\n', content)
     content = re.sub(r'<.*?>+', '\n', content)
-    content = re.sub(r'  ', '\n', content)
+    content = re.sub(r'  ', '', content)
+    content = re.sub(r'\n+', '\n', content)
 
 
     # 单独写入这一章
@@ -99,9 +101,14 @@ def thread_getOneBook(indexUrl):
     # 提取出书的每章节不变的url
     indexUrl = re.sub(r'index.html', '', indexUrl)
     charts = soup.select("#list dd a")
+    n = 1
     for i in charts:
+        if n < 7:
+            n += 1
+            continue
         # print(i+i.attrs['href'])
         charts_url.append(indexUrl + i.attrs['href'])
+
 
     # 创建下载这本书的进程
     p = multiprocessing.Pool()
@@ -124,8 +131,8 @@ def process_getAllBook(base):
     # 输入你要下载的书的首页地址
     print('主程序的PID：%s' % os.getpid())
     book_indexUrl=[
-        'https://www.booktxt.net/0_706/',
-        #'https://www.23txt.com/files/article/html/55/55651/',
+        #'https://www.booktxt.net/0_706/',
+        'https://www.booktxt.net/5_5871/',
     ]
     print("-------------------开始下载-------------------")
     p = []
