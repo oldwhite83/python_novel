@@ -14,9 +14,8 @@ def get_pages(url):
         # 创建请求日志文件夹
         if 'Log' not in os.listdir('.'):
             os.mkdir(r"./Log")
-
         request = urllib.request.Request(url)
-        response = urllib.request.urlopen(request)
+        response = urllib.request.urlopen(request,timeout=2)
         content = response.read()
         data = content.decode('gbk')
         # soup转换
@@ -121,8 +120,12 @@ def process_getAllBook(base):
     # 输入你要下载的书的首页地址
     print('主程序的PID：%s' % os.getpid())
     book_indexUrl=[
-        'https://www.23txt.com/files/article/html/56/56263/',
-        'https://www.23txt.com/files/article/html/55/55651/',
+        # 我师兄实在太稳健了
+        #'https://www.23txt.com/files/article/html/56/56263/',
+        # 明天下
+        #'https://www.23txt.com/files/article/html/55/55651/',
+        # 九星毒奶
+        'https://www.23txt.com/files/article/html/50/50176/'
     ]
     print("-------------------开始下载-------------------")
     p = []
@@ -159,11 +162,10 @@ def sort_allCharts(path,filename):
 
 
 if __name__=="__main__":
-    # # 主页
-    #base = 'http://www.yznnw.com'
+    # 主页
     base = 'https://www.23txt.com'
     # 下载指定的书
     process_getAllBook(base)
-    #sort_allCharts(r'./我师兄实在太稳健了',"我师兄实在太稳健了.txt")
+    # sort_allCharts(r'./我师兄实在太稳健了',"我师兄实在太稳健了.txt")
     # sort_allCharts(r'./武道天下',"武道天下.txt")
     # sort_allCharts(r'./修罗武神',"修罗武神.txt")
